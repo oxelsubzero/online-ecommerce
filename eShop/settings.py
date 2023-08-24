@@ -150,7 +150,7 @@ EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'oxelmiguel@outlook.fr'
-EMAIL_HOST_PASSWORD = '9708mi=$'
+EMAIL_HOST_PASSWORD = ''
 
 
 
