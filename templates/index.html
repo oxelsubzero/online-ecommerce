@@ -1,0 +1,387 @@
+{% extends 'partial/base.html' %}
+
+{% block content %}
+
+{% load static %}
+	<!-- Slider Area -->
+	<section class="hero-slider">
+		<!-- Single Slider -->
+		<div class="single-slider">
+			<div class="container">
+				<div class="row no-gutters">
+
+					<div class="col-lg-9 offset-lg-3 col-12">
+						<div class="text-inner">
+							<div class="row">
+								<div class="col-lg-7 col-12">
+									<div class="hero-text">
+										<h1><span>Pour vos premieres commandes</span>50% DE REDUCTION</h1>
+										<p>Beneficiez d'un coupon de Bienvenue de 50%<br> Pour vos premiere commande <br> peut importe le montant total de vos achats.</p>
+										<div class="button">
+											<a href="{% url "shop"%}" class="btn">Achetez maintenant!</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Single Slider -->
+	</section>
+	<!--/ End Slider Area -->
+
+
+    <!-- Start Small Banner  -->
+	<section class="small-banner section" id="produit">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h2>Catégories</h2>
+					</div>
+				</div>
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-banner">
+						<img src="{% static "images/iphone.png" %}" alt="#">
+						<div class="content">
+							
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-banner">
+						<img src="{% static "images/mac.png" %}" alt="#">
+						<div class="content">
+							
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-12">
+					<div class="single-banner tab-height">
+						<img src="{% static "images/ipad.png" %}" alt="#">
+						<div class="content">
+							
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+			</div>
+		</div>
+	</section>
+
+    <section class="small-banner section">
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-banner">
+						<img src="{% static "images/watch.png" %}" alt="#">
+						<div class="content">
+							
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-banner">
+						<img src="{% static "images/music.png" %}" alt="#">
+						<div class="content">
+							
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-12">
+					<div class="single-banner tab-height">
+						<img src="{% static "images/tv.png" %}" alt="#">
+						<div class="content">
+							
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+			</div>
+		</div>
+	</section>
+
+
+    
+
+	<!-- Start Most Popular -->
+	<div class="product-area most-popular section">
+        <div class="container-fluid">
+            <div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h2>Article chaud</h2>
+					</div>
+				</div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel popular-slider">
+						{% for produit in produits_chaud %}
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <a href="#">
+                                        <img class="default-img" src="{{ produit.image.url }}" alt="#">
+                                        <img class="hover-img" src="{{ produit.image.url }}" alt="error">
+                                        <span class="out-of-stock">Hot</span>
+                                    </a>
+                                    <div class="button-head">
+                                      
+
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h3><a href="#">{{ produit.nom }}</a></h3>
+                                    <div class="product-price">
+                                        <span class="old">{{ produit.prix }}</span>
+                                        <span>{{ produit.prix }}</span>
+										<div class="product-action-2">
+											<form action="{% url 'detail' produit.id %}" method="post">
+												{% csrf_token %}
+												<button title="Voir detail" type="submit">Detail</button>
+											</form>
+                                        </div>
+										<div class="product-action-2">
+											<form action="{% url 'ajouter_au_panier' produit.id %}" method="post">
+												{% csrf_token %}
+												<button title="Add to cart" type="submit">Ajouter au panier</button>
+											</form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>  
+						{% endfor %}
+	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- End Most Popular Area -->
+
+
+
+
+	
+	
+	<!-- Start Shop Home List  -->
+	<section class="shop-home-list section py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>En vente</h1>
+							</div>
+						</div>
+					</div>
+                    {% for produit in produits_vente %}
+                        <div class="single-list">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="list-image overlay">
+                                        <img src="{{ produit.image.url }}" alt="#">
+										<form action="{% url 'ajouter_au_panier' produit.id %}" method="post">
+											{% csrf_token %}
+											<button title="Add to cart" type="submit">Ajouter au panier</button>
+										</form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 no-padding">
+                                    <div class="content">
+                                        <h4 class="title"><a href="#">{{ produit.prix }}</a></h4>
+                                        <p class="price with-discount">{{ produit.prix }}</p>
+										<div class="product-action-2">
+											<form action="{% url 'detail' produit.id %}" method="post">
+												{% csrf_token %}
+												<button title="Voir detail" type="submit">Detail</button>
+											</form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+				
+				
+					
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>Meilleure vente</h1>
+							</div>
+						</div>
+					</div>
+			
+					{% for produit in produits_meilleurs %}
+                        <div class="single-list">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="list-image overlay">
+                                        <img src="{{ produit.image.url }}" alt="#">
+										<form action="{% url 'ajouter_au_panier' produit.id %}" method="post">
+											{% csrf_token %}
+											<button title="Add to cart" type="submit">Ajouter au panier</button>
+										</form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 no-padding">
+                                    <div class="content">
+                                        <h5 class="title"><a href="#">{{ produit.prix }}</a></h5>
+                                        <p class="price with-discount">{{ produit.prix }}</p>
+										<div class="product-action-2">
+											<form action="{% url 'detail' produit.id %}" method="post">
+												{% csrf_token %}
+												<button title="Voir detail" type="submit">Detail</button>
+											</form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					{% endfor %}
+					
+				</div>
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>Plus rechercher</h1>
+							</div>
+						</div>
+					</div>
+				
+                    {% for produit in produits_recher %}
+                        <div class="single-list">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="list-image overlay">
+                                        <img src="{{ produit.image.url }}" alt="#">
+										<form action="{% url 'ajouter_au_panier' produit.id %}" method="post">
+											{% csrf_token %}
+											<button title="Add to cart" type="submit">Ajouter au panier</button>
+										</form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 no-padding">
+                                    <div class="content">
+                                        <h5 class="title"><a href="#">{{ produit.prix }}</a></h5>
+                                        <p class="price with-discount">{{ produit.prix }}</p>
+										<div class="product-action-2">
+											<form action="{% url 'detail' produit.id %}" method="post">
+												{% csrf_token %}
+												<button title="Voir detail" type="submit">Detail</button>
+											</form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					{% endfor %}
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Home List  -->
+
+
+		<!-- Start Shop Services Area -->
+		<section class="shop-services section home" id="service">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-rocket"></i>
+							<h4>Livraison gratuit</h4>
+							<p>A patir de  2000 € </p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-reload"></i>
+							<h4>Retour gratuit</h4>
+							<p>Pendant 30 jours apres l'achat</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-lock"></i>
+							<h4>Paiement sécurisé</h4>
+							<p>100% paiement sécurisé</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Start Single Service -->
+						<div class="single-service">
+							<i class="ti-tag"></i>
+							<h4>Meilleur prix</h4>
+							<p>les prix les plus bas du marché</p>
+						</div>
+						<!-- End Single Service -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Shop Services Area -->
+
+	
+	<!-- Start Cowndown Area -->
+	<section class="cown-down" >
+		<div class="section-inner ">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-4 col-12 padding-right">
+						<div class="image">
+							<img src="{% static "images/iphone13.jpeg"%}" alt="#">
+						</div>	
+					</div>	
+					<div class="col-lg-8 col-12 padding-left">
+						<div class="content">
+							<div class="heading-block">
+								<p class="small-title">Affaire du moment</p>
+								<h3 class="title">Iphone 13 </h3>
+								<p class="text">Toute la gamme des iphones 13 reconditionnés sont au meme prix.</p>
+								<h1 class="price">$1200 <s>$1890</s></h1>
+								<div class="coming-time">
+									<div class="clearfix" data-countdown="2023/09/01"></div>
+								</div>
+							</div>
+						</div>	
+					</div>	
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /End Cowndown Area -->
+
+	<section class="countdown container"> <div class="row"><div class="col-12" style="height:20px;"></div></div></section>
+	
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'partial/base_auth.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card mt-5">
+
+
+      <div class="card-body">
+        <div class="card-title py-3">
+          <h4>Connectez vous à votre compte</h4>
+        </div>
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          {% include 'partial/_messages.html' %}
+      
+          <div class="form-group py-3">    
+            <input type="text" name="username" value="{{fieldValues.username}}" id="usernameField" class="form-control form-control-sm" placeholder="nom d'utilisateur">
+          </div>
+
+          <div class="form-group py-3">
+            <input type="password" name="password" id="passwordField" class="form-control form-control-sm" placeholder="Mot de passe"/>
+            <small id="show" class="py-3 float-right" style="display:none;cursor: pointer;">show</small>
+          </div>
+          <input type="submit" value="Login" class="btn btn-block btn-primary submit" />
+          <small class="py-3">Vous n'avez pas de compte ? <a href="{% url "register" %}" ><u>Creez en un ici</u></a></small>
+        </form>
+
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock content %}

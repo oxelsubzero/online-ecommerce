@@ -1,0 +1,51 @@
+{% extends 'partial/base_auth.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-4 col-sm-4"></div>
+    <div class="col-md-4 col-sm-4">
+
+        <div class="card mt-5">
+
+
+            <div class="card-body">
+
+                <div class="card-title py-3 ">
+                    <h4>Creer votre compte</h4>
+                </div>
+
+                <form action="" method="post">
+                    {% include "partial/_messages.html" %}
+                    {% csrf_token %} 
+                    <div class="form-group py-3">
+                        <input type="email" name="email" id="emailField" value="{{fieldValues.email}}" class="form-control form-control-sm" placeholder="Email">
+                    </div>
+                    <div id="invalid1" class="invalid-feedback" style="display:none"></div>
+                    <div class="form-group py-3">    
+                        <input type="text" name="username" value="{{fieldValues.username}}" id="usernameField" class="form-control form-control-sm" placeholder="nom d'utilisateur">
+                    </div>
+                    <div id="invalid" class="invalid-feedback" style="display:none"></div>
+                    <div class="form-group py-3">
+                        <input type="password" name="password" id="passwordField" class="form-control form-control-sm" placeholder="mot de passe"/>
+                        <small id="show" class="py-3 float-right" style="display:none;cursor: pointer;">voir</small>
+                    </div>
+                    <input type="submit" value="Register" class="btn btn-block btn-primary submit" />
+                    <small class="py-3">Vous avez deja de compte ? <a href="{% url "login" %}"><u>connectez-vous ici</u></a></small>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-4"></div>
+
+</div>
+
+<script src ={% static 'js/register.js' %}></script>
+
+{% endblock content %}

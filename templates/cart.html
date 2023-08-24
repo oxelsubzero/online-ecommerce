@@ -1,0 +1,106 @@
+{% extends 'partial/base.html' %}
+
+{% block content %}
+
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="{% url "index"%}">Acceuil<i class="ti-arrow-right"></i></a></li>
+                        <li><a href="{% url "shop"%}">Boutique<i class="ti-arrow-right"></i></a></li>
+                        <li class="active"><a href="{% url "cart"%}">Panier</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+        
+<!-- Shopping Cart -->
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- Shopping Summery -->
+                <table class="table shopping-summery">
+                    <thead>
+                        <tr class="main-hading">
+                            <th>Produits</th>
+                            <th>Nom</th>
+                            <th class="text-center">Prix unitaire</th>
+                            <th class="text-center">Quantité</th>
+                            <th class="text-center">TOTAL</th> 
+                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td class="image" data-title="No"><img src="{{item.produit.image.url}}" alt="#"></td>
+                                <td class="product-des" data-title="Description">
+                                    <p class="product-name">{{ item.produit.nom }}</p>
+                                </td>
+                                <td class="price" data-title="Price"><span>{{ item.produit.prix }} €</span></td>
+                                <td class="qty" data-title="Qty"><!-- Input Order -->
+                                    <div class="input-group">
+                                        <p  class="input-number" >{{item.quantite}}</p>
+                                    </div>
+                                    <!--/ End Input Order -->
+                                </td>
+                                <td class="total-amount" data-title="Total"><span>{{ item.total_cost  }} €</span></td>
+                                <td class="action" data-title="Remove"><a href="{% url 'supprimer_du_panier' item.id %}"><i class="ti-trash remove-icon"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!--/ End Shopping Summery -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <!-- Total Amount -->
+                <div class="total-amount">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-5 col-12">
+                            <div class="left">
+                                <div class="coupon">
+                                    <form action="#" target="_blank">
+                                        <input name="Coupon" id="coupon" placeholder="Enter Your Coupon">
+                                        <div id="invalid" class="invalid-feedback" style="display:none"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-7 col-12">
+                            <div class="right">
+                                <ul>
+                                    <li>total<span>{{ total  }} €</span></li>
+                                    <li>Livraison<span>Gratuit</span></li>
+                                    <li id="reduc" style="display:none"></li>
+                                    <li>Vous économisez <span>$20.00</span></li>
+                                    <li class="last">Vous payez<span id="total">{{total}}</span></li>
+                                </ul>
+                                <div class="button5">
+                                    
+                                    <a href="{% url 'checkout'  %}" class="btn" id="checkout">Paiement</a>
+                                    <a href="{% url 'shop'%}" class="btn">Continuer à acheter</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Total Amount -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ End Shopping Cart -->
+
+
+
+{% endblock content %}
